@@ -5,11 +5,11 @@ echo "time set to America/New_york:"
 timedatectl | grep "Time"
 hostnamectl set-hostname $1
 hostnamectl
-sudo apt install apache2
+sudo apt-get install -y apache2
 apache2 -version
 sudo ufw allow 'Apache'
-sudo systemctl status apache2
-lynx http://$(hostname -I)
+sudo /lib/systemd/systemd-sysv-install enable apache2
+curl -XGET http://$(hostname -I)
 sudo mkdir -p /var/www/sampledomain.com/html
 sudo chown -R $USER:$USER /var/www/sampledomain.com/html
 sudo chmod -R 755 /var/www/sampledomain.com
@@ -32,11 +32,13 @@ ErrorLog ${APACHE_LOG_DIR}/error.log
 CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>""" > /etc/apache2/sites-available/sampledomain.com.conf
 
-sudo a2ensite sampledomain.com.conf
-sudo a2dissite 000-default.conf
-sudo systemctl restart apache2
-#sudo apache2ctl configtest
+sudo unlink /etc/apache2/sites-enabled/000-default.conf
+sudo ln -s /etc/apache2/sites-available/sampledomain.com.conf /etc/apache2/sites-enabled/
+sudo service apache2 reload
+sudo /etc/init.d/apache2 restart
 echo "ServerName sampledomain.com" | sudo tee /etc/apache2/conf-available/servername.conf
 sudo a2enconf servername
-sudo apache2ctl configtest
-lynx http://sampledomain.com
+sudo apache2ctl -t
+curl -Iv http://sampledomain.com
+
+
