@@ -41,3 +41,6 @@ sudo a2enconf servername
 sudo apache2ctl -t
 curl -Iv http://sampledomain.com
 sudo apt-get install libopenscap8
+#129.10.0.0/16
+#155.33.0.0/16
+#204.167.52.0/24
