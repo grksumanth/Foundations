@@ -40,3 +40,4 @@ echo "ServerName sampledomain.com" | sudo tee /etc/apache2/conf-available/server
 sudo a2enconf servername
 sudo apache2ctl -t
 curl -Iv http://sampledomain.com
+sudo apt-get install libopenscap8
