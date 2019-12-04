@@ -14,3 +14,5 @@ Perl or python script can also be mixed to get access to newer algo
 or add "smbencrypt password | awk '{print $1}'" to get the LM hash and compare it.
 
 totally flexible and can be re-written easily or modified based on the need.
+
+crypto.sh -e <receiver public key> <sender private key> <plain file> <encrypted file>
