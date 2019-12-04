@@ -15,4 +15,4 @@ or add "smbencrypt password | awk '{print $1}'" to get the LM hash and compare i
 
 totally flexible and can be re-written easily or modified based on the need.
 
-crypto.sh -e <receiver public key> <sender private key> <plain file> <encrypted file>
+crypto.sh -e (receiver public key) (sender private key) (plain file) (encrypted file)
